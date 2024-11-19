@@ -5,6 +5,7 @@ import type {
 } from "../../controllers/update-users/protocols";
 import type { User } from "../../models/user";
 import { MongoClient } from "../../database/mongo";
+import type { MongoUser } from "../mongo-protocols";
 
 export class MongoUpdateUsersRepository implements IUpdateUserRepository {
   async updateUser(id: string, params: UpdateUserParams): Promise<User> {
@@ -31,7 +32,7 @@ export class MongoUpdateUsersRepository implements IUpdateUserRepository {
 
     // Recupera o usuário atualizado
     const user = await MongoClient.db
-      .collection<Omit<User, "id">>("users")
+      .collection<MongoUser>("users")
       .findOne({ _id: objectId });
 
     if (!user) {
