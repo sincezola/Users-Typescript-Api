@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "outDir": "./build",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "target": "ES2020",           // Define a versão do JavaScript de saída
+    "module": "CommonJS",         // Módulos usados no Node.js
+    "outDir": "./build",          // Pasta onde os arquivos compilados serão gerados
+    "rootDir": "./src",           // Pasta onde estão seus arquivos TypeScript
+    "strict": true,               // Regras de verificação estritas
+    "esModuleInterop": true,      // Compatibilidade com ES6 e CommonJS
+    "skipLibCheck": true          // Ignorar verificações em arquivos .d.ts
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*.ts"],     // Apenas arquivos TypeScript na pasta src
+  "exclude": ["node_modules"]     // Ignorar arquivos na pasta node_modules
 }

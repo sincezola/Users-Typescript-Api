@@ -12,11 +12,11 @@ export interface HttpRequest<B> {
 export enum httpStatusCode {
   OK = 200,
   CREATED = 201,
-  BAD_RESQUEST = 400,
+  BAD_REQUEST = 400,
   SERVER_ERROR = 500,
   NO_CONTENT = 204,
 }
 
 export interface IController {
-  handle(httpRequest: HttpRequest<unknown>): Promise<HttpResponse<unknown>>
+  handle(httpRequest: HttpRequest<unknown>): Promise<HttpResponse<unknown>>;
 }

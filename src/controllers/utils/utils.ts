@@ -2,7 +2,7 @@ import { httpStatusCode, type HttpResponse } from "../protocols";
 
 export const badRequest = (message: string): HttpResponse<string> => {
   return {
-    statusCode: httpStatusCode.BAD_RESQUEST,
+    statusCode: httpStatusCode.BAD_REQUEST,
     body: message,
   };
 };
