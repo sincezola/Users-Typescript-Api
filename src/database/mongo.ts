@@ -1,4 +1,4 @@
-import { MongoClient as Mongo, type Db } from "mongodb";
+import { MongoClient as Mongo, type Db, type Document } from "mongodb";
 
 export const MongoClient = {
   // Singleton de Pooling
@@ -17,5 +17,16 @@ export const MongoClient = {
     this.db = db;
 
     console.log("connected to mongodb");
+  },
+
+  // Método utilitário para mapear documentos e substituir `_id` por `id`
+  mapDocument<T extends Document>(doc: T): T & { id: string } {
+    const { _id, ...rest } = doc;
+    return { ...rest, id: _id.toHexString() } as T & { id: string };
+  },
+
+  // Método utilitário para mapear múltiplos documentos
+  mapDocuments<T extends Document>(docs: T[]): Array<T & { id: string }> {
+    return docs.map((doc) => this.mapDocument(doc));
   },
 };

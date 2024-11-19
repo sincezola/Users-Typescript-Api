@@ -31,16 +31,14 @@ export class MongoUpdateUsersRepository implements IUpdateUserRepository {
     }
 
     // Recupera o usuário atualizado
-    const user = await MongoClient.db
+    const users = await MongoClient.db
       .collection<MongoUser>("users")
       .findOne({ _id: objectId });
 
-    if (!user) {
-      throw new Error("User not updated");
+    if (!users) {
+      throw new Error("User cannot be updated");
     }
 
-    // Extrai o `_id` e recria o objeto
-    const { _id, ...rest } = user;
-    return { id: _id.toHexString(), ...rest };
+    return MongoClient.mapDocument(users);
   }
 }

@@ -19,8 +19,6 @@ export class MongoCreateUserRepository implements ICreateUserRepository {
       throw new Error("User not created");
     }
 
-    const { _id, ...rest } = user;
-
-    return { id: _id.toHexString(), ...rest };
+    return MongoClient.mapDocument(user);
   }
 }

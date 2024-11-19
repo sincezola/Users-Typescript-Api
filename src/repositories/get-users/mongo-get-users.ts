@@ -10,9 +10,7 @@ export class MongoGetUsersRepository implements IGetUsersRepository {
       .find({})
       .toArray();
 
-    return users.map(({ _id, ...rest }) => ({
-      ...rest,
-      id: _id.toHexString(),
-    }));
+    // Usa o método mapDocuments para aplicar a transformação
+    return MongoClient.mapDocuments(users);
   }
 }

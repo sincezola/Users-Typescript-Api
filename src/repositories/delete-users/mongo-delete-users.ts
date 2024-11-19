@@ -22,8 +22,6 @@ export class MongoDeleteUserRepository implements IDeleteUserRepository {
       throw new Error("User cannot be deleted.");
     }
 
-    const { _id, ...rest } = user;
-
-    return { id: _id.toHexString(), ...rest };
+    return MongoClient.mapDocument(user);
   }
 }
