@@ -1,5 +1,5 @@
 export interface HttpResponse<T> {
-  statusCode: number;
+  statusCode: httpStatusCode;
   body: T;
 }
 
@@ -7,6 +7,14 @@ export interface HttpRequest<B> {
   params?: any;
   headers?: any;
   body?: B;
+}
+
+export enum httpStatusCode {
+  OK = 200,
+  CREATED = 201,
+  BAD_RESQUEST = 400,
+  SERVER_ERROR = 500,
+  NO_CONTENT = 204,
 }
 
 export interface IController {
