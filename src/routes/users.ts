@@ -7,6 +7,8 @@ import { UpdateUserController } from "../controllers/update-users/update-users";
 import { MongoUpdateUsersRepository } from "../repositories/update-users/mongo-update-users";
 import { DeleteUserController } from "../controllers/delete-users/delete-users";
 import { MongoDeleteUserRepository } from "../repositories/delete-users/mongo-delete-users";
+import { MongoGetUserRepository } from "../repositories/get-users/mongo-get-user";
+import { GetUserController } from "../controllers/get-user/get-user";
 
 const router = Router();
 
@@ -19,6 +21,28 @@ router.get("/users", async (_req, res) => {
 
   res.status(statusCode).send(body);
 });
+
+router.get("/users/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const mongoGetUserRepository = new MongoGetUserRepository();
+    const getUserController = new GetUserController(mongoGetUserRepository);
+
+    const httpRequest = {
+      params: { id },
+    };
+
+    // Passa o HttpRequest para o método handle
+    const { body, statusCode } = await getUserController.handle(httpRequest);
+
+    res.status(statusCode).send(body);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 
 router.post("/users", async (req, res) => {
   const mongoCreateUserRepository = new MongoCreateUserRepository();

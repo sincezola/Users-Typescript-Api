@@ -1,11 +1,13 @@
+import type { GetUserParams } from "./get-user/protocols";
+
 export interface HttpResponse<T> {
   statusCode: httpStatusCode;
   body: T;
 }
 
 export interface HttpRequest<B> {
-  params?: any;
-  headers?: any;
+  params?: GetUserParams;
+  headers?: Record<string, string>;
   body?: B;
 }
 
